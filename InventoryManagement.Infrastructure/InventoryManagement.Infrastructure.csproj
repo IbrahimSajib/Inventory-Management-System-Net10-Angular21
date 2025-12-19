@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InventoryManagement.Core\InventoryManagement.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="UnitOfWork\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+
 </Project>
