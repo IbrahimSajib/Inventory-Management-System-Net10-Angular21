@@ -24,6 +24,14 @@ bld/
 # Visual Studio cache/options directory
 .vs/
 
+# Angular build output & cache
+InventoryManagement.UI/dist/
+InventoryManagement.UI/.angular/
+InventoryManagement.UI/.nx/cache
+
+# Node dependencies
+**/node_modules/
+
 # IDEs
 .idea/
 *.swp
