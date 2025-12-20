@@ -1,0 +1,49 @@
+﻿using InventoryManagement.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace InventoryManagement.Infrastructure.Data.Configurations;
+
+public class RoleConfiguration : IEntityTypeConfiguration<Role>
+{
+    public void Configure(EntityTypeBuilder<Role> builder)
+    {
+        builder.ToTable("Role");
+
+        builder.HasKey(r => r.Id);
+
+        builder.Property(r => r.Id)
+            .ValueGeneratedOnAdd();
+
+        builder.Property(r => r.RoleName)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(r => r.Description)
+            .HasMaxLength(500);
+
+        builder.Property(r => r.CreatedAt)
+            .IsRequired();
+
+        builder.Property(r => r.IsDeleted)
+            .IsRequired()
+            .HasDefaultValue(false);
+
+        // Indexes
+        builder.HasIndex(r => r.RoleName)
+            .IsUnique();
+
+        // Relationships
+        builder.HasMany(r => r.UserRoles)
+            .WithOne(ur => ur.Role)
+            .HasForeignKey(ur => ur.RoleId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Seed default roles
+        builder.HasData(
+            new Role { Id = 1, RoleName = "Admin", Description = "System Administrator", CreatedAt = DateTime.UtcNow },
+            new Role { Id = 2, RoleName = "Manager", Description = "Inventory Manager", CreatedAt = DateTime.UtcNow },
+            new Role { Id = 3, RoleName = "User", Description = "Regular User", CreatedAt = DateTime.UtcNow }
+        );
+    }
+}
