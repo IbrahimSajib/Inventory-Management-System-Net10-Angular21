@@ -43,6 +43,8 @@ public class ApplicationDbContext : DbContext
         // Global query filter for soft delete
         modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
         modelBuilder.Entity<Role>().HasQueryFilter(r => !r.IsDeleted);
+        modelBuilder.Entity<UserRole>().HasQueryFilter(ur => !ur.IsDeleted);
+        modelBuilder.Entity<RefreshToken>().HasQueryFilter(rt => !rt.IsDeleted);
         modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsDeleted);
         modelBuilder.Entity<UnitOfMeasure>().HasQueryFilter(u => !u.IsDeleted);
         modelBuilder.Entity<Customer>().HasQueryFilter(c => !c.IsDeleted);
@@ -50,7 +52,10 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Item>().HasQueryFilter(i => !i.IsDeleted);
         modelBuilder.Entity<ItemStock>().HasQueryFilter(i => !i.IsDeleted);
         modelBuilder.Entity<PurchaseOrder>().HasQueryFilter(p => !p.IsDeleted);
+        modelBuilder.Entity<PurchaseOrderItem>().HasQueryFilter(pi => !pi.IsDeleted);
         modelBuilder.Entity<SalesOrder>().HasQueryFilter(s => !s.IsDeleted);
+        modelBuilder.Entity<SalesOrderItem>().HasQueryFilter(si => !si.IsDeleted);
         modelBuilder.Entity<Quotation>().HasQueryFilter(q => !q.IsDeleted);
+        modelBuilder.Entity<QuotationItem>().HasQueryFilter(qi => !qi.IsDeleted);
     }
 }

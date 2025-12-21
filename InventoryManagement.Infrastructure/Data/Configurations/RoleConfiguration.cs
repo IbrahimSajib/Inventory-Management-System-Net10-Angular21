@@ -41,9 +41,9 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
 
         // Seed default roles
         builder.HasData(
-            new Role { Id = 1, RoleName = "Admin", Description = "System Administrator", CreatedAt = DateTime.UtcNow },
-            new Role { Id = 2, RoleName = "Manager", Description = "Inventory Manager", CreatedAt = DateTime.UtcNow },
-            new Role { Id = 3, RoleName = "User", Description = "Regular User", CreatedAt = DateTime.UtcNow }
+            new Role { Id = 1, RoleName = "Admin", Description = "System Administrator", CreatedAt = new DateTime(2025, 12, 21, 0, 0, 0, DateTimeKind.Utc) },
+            new Role { Id = 2, RoleName = "Manager", Description = "Inventory Manager", CreatedAt = new DateTime(2025, 12, 21, 0, 0, 0, DateTimeKind.Utc) },
+            new Role { Id = 3, RoleName = "User", Description = "Regular User", CreatedAt = new DateTime(2025, 1, 12, 21, 0, 0, DateTimeKind.Utc) }
         );
     }
 }
