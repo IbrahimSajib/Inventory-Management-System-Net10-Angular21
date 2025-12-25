@@ -46,10 +46,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         // Indexes
         builder.HasIndex(u => u.UserName)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         builder.HasIndex(u => u.Email)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships
         builder.HasMany(u => u.UserRoles)

@@ -30,7 +30,6 @@ public class UserService : IUserService
     {
         // Base query
         var query = from user in _unitOfWork.Users.GetQueryable()
-                    where !user.IsDeleted
                     select user;
 
         // Search filter
@@ -94,7 +93,7 @@ public class UserService : IUserService
     public async Task<ApiResponse<UserDto>> GetUserByIdAsync(int id)
     {
         var user = await (from u in _unitOfWork.Users.GetQueryable()
-                          where u.Id == id && !u.IsDeleted
+                          where u.Id == id
                           select u)
                          .Include(u => u.UserRoles)
                             .ThenInclude(ur => ur.Role)
@@ -173,7 +172,7 @@ public class UserService : IUserService
     public async Task<ApiResponse<UserDto>> UpdateUserAsync(int id, UpdateUserDto dto)
     {
         var user = await _unitOfWork.Users.GetByIdAsync(id);
-        if (user == null || user.IsDeleted)
+        if (user == null)
         {
             return ApiResponse<UserDto>.FailureResponse("User not found");
         }
@@ -246,7 +245,7 @@ public class UserService : IUserService
     public async Task<ApiResponse<bool>> DeleteUserAsync(int id)
     {
         var user = await _unitOfWork.Users.GetByIdAsync(id);
-        if (user == null || user.IsDeleted)
+        if (user == null)
         {
             return ApiResponse<bool>.FailureResponse("User not found");
         }

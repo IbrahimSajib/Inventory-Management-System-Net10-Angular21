@@ -35,7 +35,7 @@ public class AuthService : IAuthService
     {
         // Find user with roles
         var user = await (from u in _unitOfWork.Users.GetQueryable()
-                          where u.UserName == request.UserName && !u.IsDeleted
+                          where u.UserName == request.UserName
                           select u)
                          .Include(u => u.UserRoles)
                             .ThenInclude(ur => ur.Role)

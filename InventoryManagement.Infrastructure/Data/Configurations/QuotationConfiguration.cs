@@ -57,7 +57,8 @@ public class QuotationConfiguration : IEntityTypeConfiguration<Quotation>
 
         // Indexes
         builder.HasIndex(q => q.QuotationNumber)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships
         builder.HasOne(q => q.Customer)

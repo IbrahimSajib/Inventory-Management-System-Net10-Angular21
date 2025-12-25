@@ -31,7 +31,8 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
 
         // Indexes
         builder.HasIndex(r => r.RoleName)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships
         builder.HasMany(r => r.UserRoles)

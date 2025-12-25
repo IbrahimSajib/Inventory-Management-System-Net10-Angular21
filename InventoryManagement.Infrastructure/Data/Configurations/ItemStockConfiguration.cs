@@ -41,6 +41,7 @@ public class ItemStockConfiguration : IEntityTypeConfiguration<ItemStock>
 
         // Unique index on ItemId
         builder.HasIndex(s => s.ItemId)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
     }
 }

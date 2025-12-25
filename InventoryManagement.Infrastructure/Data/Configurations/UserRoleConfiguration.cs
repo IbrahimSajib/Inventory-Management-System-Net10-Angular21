@@ -26,7 +26,8 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
 
         // Composite unique index to prevent duplicate user-role assignments
         builder.HasIndex(ur => new { ur.UserId, ur.RoleId })
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships configured in User and Role entities
     }

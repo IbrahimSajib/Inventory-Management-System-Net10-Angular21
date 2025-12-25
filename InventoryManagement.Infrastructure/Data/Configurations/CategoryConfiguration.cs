@@ -31,6 +31,7 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         // Indexes
         builder.HasIndex(c => c.CategoryName)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
     }
 }

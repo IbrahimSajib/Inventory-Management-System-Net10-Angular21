@@ -45,7 +45,8 @@ public class ItemConfiguration : IEntityTypeConfiguration<Item>
 
         // Indexes
         builder.HasIndex(i => i.ItemCode)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships
         builder.HasOne(i => i.Category)

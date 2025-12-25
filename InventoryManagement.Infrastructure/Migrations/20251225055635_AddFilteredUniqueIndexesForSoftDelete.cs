@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InventoryManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddFilteredUniqueIndexesForSoftDelete : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -462,7 +462,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_Category_CategoryName",
                 table: "Category",
                 column: "CategoryName",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_Email",
@@ -478,7 +479,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_Item_ItemCode",
                 table: "Item",
                 column: "ItemCode",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Item_UnitOfMeasureId",
@@ -489,13 +491,15 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_ItemStock_ItemId",
                 table: "ItemStock",
                 column: "ItemId",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseOrder_OrderNumber",
                 table: "PurchaseOrder",
                 column: "OrderNumber",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchaseOrder_VendorId",
@@ -521,7 +525,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_Quotation_QuotationNumber",
                 table: "Quotation",
                 column: "QuotationNumber",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuotationItem_ItemId",
@@ -547,7 +552,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_Role_RoleName",
                 table: "Role",
                 column: "RoleName",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesOrder_CustomerId",
@@ -558,7 +564,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_SalesOrder_OrderNumber",
                 table: "SalesOrder",
                 column: "OrderNumber",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesOrderItem_ItemId",
@@ -574,19 +581,22 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_UnitOfMeasure_UnitName",
                 table: "UnitOfMeasure",
                 column: "UnitName",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_Email",
                 table: "User",
                 column: "Email",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_UserName",
                 table: "User",
                 column: "UserName",
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRole_RoleId",
@@ -597,7 +607,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                 name: "IX_UserRole_UserId_RoleId",
                 table: "UserRole",
                 columns: new[] { "UserId", "RoleId" },
-                unique: true);
+                unique: true,
+                filter: "[IsDeleted] = 0");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vendor_Email",

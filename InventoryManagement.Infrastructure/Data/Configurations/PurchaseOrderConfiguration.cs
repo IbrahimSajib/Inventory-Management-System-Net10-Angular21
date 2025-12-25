@@ -51,7 +51,8 @@ public class PurchaseOrderConfiguration : IEntityTypeConfiguration<PurchaseOrder
 
         // Indexes
         builder.HasIndex(p => p.OrderNumber)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships
         builder.HasOne(p => p.Vendor)

@@ -54,7 +54,8 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
 
         // Indexes
         builder.HasIndex(s => s.OrderNumber)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("[IsDeleted] = 0");
 
         // Relationships
         builder.HasOne(s => s.Customer)

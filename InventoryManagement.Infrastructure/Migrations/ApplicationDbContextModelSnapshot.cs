@@ -53,7 +53,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("Category", (string)null);
                 });
@@ -169,7 +170,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ItemCode")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.HasIndex("UnitOfMeasureId");
 
@@ -212,7 +214,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ItemId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("ItemStock", (string)null);
                 });
@@ -279,7 +282,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderNumber")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.HasIndex("VendorId");
 
@@ -407,7 +411,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("QuotationNumber")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("Quotation", (string)null);
                 });
@@ -548,7 +553,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RoleName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("Role", (string)null);
 
@@ -647,7 +653,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("OrderNumber")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("SalesOrder", (string)null);
                 });
@@ -743,7 +750,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UnitName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("UnitOfMeasure", (string)null);
                 });
@@ -798,10 +806,12 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.HasIndex("UserName")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("User", (string)null);
                 });
@@ -834,7 +844,8 @@ namespace InventoryManagement.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.HasIndex("UserId", "RoleId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("UserRole", (string)null);
                 });
