@@ -1,3 +1,4 @@
+// src/app/features/auth/register.component.ts
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -25,14 +26,6 @@ export class RegisterComponent {
   isLoading = signal(false);
   showPassword = signal(false);
   showConfirmPassword = signal(false);
-  selectedRoles = signal<number[]>([]);
-
-  // Mock roles
-  availableRoles = [
-    { id: 1, name: 'Admin' },
-    { id: 2, name: 'Manager' },
-    { id: 3, name: 'User' }
-  ];
 
   constructor() {
     this.form = this.fb.group(
@@ -49,14 +42,15 @@ export class RegisterComponent {
   }
 
   register(): void {
-    if (this.form.invalid || this.selectedRoles().length === 0) {
+    if (this.form.invalid) {
       return;
     }
 
     this.isLoading.set(true);
+    // API will assign default roles
     const request: RegisterRequest = {
       ...this.form.value,
-      roleIds: this.selectedRoles()
+      roleIds: []
     };
 
     this.authService.register(request).subscribe({
@@ -68,20 +62,6 @@ export class RegisterComponent {
         this.isLoading.set(false);
       }
     });
-  }
-
-  toggleRole(roleId: number): void {
-    const roles = this.selectedRoles();
-    const index = roles.indexOf(roleId);
-    if (index > -1) {
-      this.selectedRoles.set([...roles.slice(0, index), ...roles.slice(index + 1)]);
-    } else {
-      this.selectedRoles.set([...roles, roleId]);
-    }
-  }
-
-  isRoleSelected(roleId: number): boolean {
-    return this.selectedRoles().includes(roleId);
   }
 
   togglePasswordVisibility(field: 'password' | 'confirm'): void {

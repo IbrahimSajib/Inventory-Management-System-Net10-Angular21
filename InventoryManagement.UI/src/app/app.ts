@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToastComponent } from './shared/components/toast.component';
-import { CategoriesComponent } from "./features/categories/categories.component";
 
 @Component({
   selector: 'app-root',

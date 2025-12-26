@@ -1,0 +1,95 @@
+<div class="flex h-screen bg-gray-100">
+  <!-- Sidenav -->
+  <aside
+    [class.w-64]="sidenavOpen()"
+    [class.w-20]="!sidenavOpen()"
+    class="bg-gray-900 text-white transition-all duration-300 ease-in-out flex flex-col overflow-y-auto"
+  >
+    <!-- Logo / Brand -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-700">
+      @if (sidenavOpen()) {
+        <h1 class="text-xl font-bold">Inventory</h1>
+      }
+      <button
+        (click)="toggleSidenav()"
+        class="p-2 hover:bg-gray-800 rounded-lg transition"
+        title="Toggle sidebar"
+      >
+        @if (sidenavOpen()) {
+          ←
+        } @else {
+          →
+        }
+      </button>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="flex-1 px-2 py-4 space-y-2">
+      @for (item of menuItems(); track item.route) {
+        <a
+          [href]="item.route"
+          class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition duration-200 group"
+        >
+          <span class="text-xl">{{ item.icon }}</span>
+          @if (sidenavOpen()) {
+            <span class="group-hover:translate-x-1 transition">{{ item.label }}</span>
+          }
+        </a>
+      }
+    </nav>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-700"></div>
+
+    <!-- User Info & Logout -->
+    <div class="p-4 border-t border-gray-700">
+      @if (sidenavOpen()) {
+        <div class="mb-4 text-sm">
+          <p class="font-semibold text-gray-100">{{ currentUser()?.fullName || currentUser()?.userName }}</p>
+          <p class="text-gray-400 text-xs">{{ currentUser()?.roles?.join(', ') }}</p>
+        </div>
+      }
+      <button
+        (click)="logout()"
+        class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition duration-200 text-sm font-medium"
+      >
+        <span>🚪</span>
+        @if (sidenavOpen()) {
+          <span>Logout</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top Header -->
+    <header class="bg-white shadow-md px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <button
+          (click)="toggleSidenav()"
+          class="p-2 hover:bg-gray-100 rounded-lg transition md:hidden"
+          title="Toggle sidebar"
+        >
+          ☰
+        </button>
+        <h2 class="text-2xl font-bold text-gray-900">Dashboard</h2>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-4">
+        <div class="text-right hidden sm:block">
+          <p class="text-sm text-gray-600">Welcome back</p>
+          <p class="font-semibold text-gray-900">{{ currentUser()?.fullName || currentUser()?.userName }}</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="flex-1 overflow-auto">
+      <div class="p-6">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>

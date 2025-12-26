@@ -1,0 +1,87 @@
+<div class="space-y-6">
+  <!-- Welcome Section -->
+  <div class="bg-linear-to-r from-blue-500 to-blue-700 text-white rounded-lg p-6">
+    <h1 class="text-3xl font-bold">Welcome, {{ currentUser()?.fullName || currentUser()?.userName }}!</h1>
+    <p class="text-blue-100 mt-2">Here's what's happening in your inventory system today.</p>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    @for (stat of stats(); track stat.label) {
+      <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-600 text-sm font-medium">{{ stat.label }}</p>
+            <p class="text-3xl font-bold text-gray-900 mt-2">{{ stat.value }}</p>
+          </div>
+          <div [ngClass]="stat.color" class="text-3xl p-4 rounded-lg">
+            {{ stat.icon }}
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Recent Activities -->
+    <div class="lg:col-span-2 bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Activities</h2>
+      <div class="space-y-4">
+        @for (activity of recentActivities(); track activity.description) {
+          <div class="flex items-start gap-4 pb-4 border-b last:border-b-0">
+            <div class="text-2xl">
+              @switch (activity.type) {
+                @case ('Order') {
+                  📋
+                }
+                @case ('Item') {
+                  📦
+                }
+                @case ('Customer') {
+                  👥
+                }
+              }
+            </div>
+            <div class="flex-1">
+              <p class="font-medium text-gray-900">{{ activity.type }}</p>
+              <p class="text-gray-600 text-sm">{{ activity.description }}</p>
+              <p class="text-gray-500 text-xs mt-1">{{ activity.timestamp }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+      <div class="space-y-3">
+        <a
+          href="/categories"
+          class="block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition duration-200 text-center font-medium"
+        >
+          Manage Categories
+        </a>
+        <a
+          href="/items"
+          class="block px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition duration-200 text-center font-medium"
+        >
+          Manage Items
+        </a>
+        <a
+          href="/customers"
+          class="block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition duration-200 text-center font-medium"
+        >
+          Manage Customers
+        </a>
+        <a
+          href="/vendors"
+          class="block px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition duration-200 text-center font-medium"
+        >
+          Manage Vendors
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
