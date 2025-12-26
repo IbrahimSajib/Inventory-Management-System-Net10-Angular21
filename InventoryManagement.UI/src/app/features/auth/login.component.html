@@ -1,0 +1,114 @@
+<div class="min-h-screen bg-linear-to-br from-blue-500 to-blue-700 flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    <!-- Card -->
+    <div class="bg-white rounded-lg shadow-2xl p-8">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Inventory Management System</h1>
+        <p class="text-gray-600 mt-2">Login to your account</p>
+      </div>
+
+      <!-- Form -->
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <!-- Username -->
+        <div class="mb-6">
+          <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            [(ngModel)]="userName"
+            name="userName"
+            #userNameInput="ngModel"
+            placeholder="Enter your username"
+            required
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+          />
+          @if (userNameInput.invalid && userNameInput.touched) {
+            <p class="text-red-600 text-sm mt-1">Username is required</p>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+            Password
+          </label>
+          <div class="relative">
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              id="password"
+              [(ngModel)]="password"
+              name="password"
+              #passwordInput="ngModel"
+              placeholder="Enter your password"
+              required
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+            />
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700"
+            >
+              @if (showPassword()) {
+                👁️
+              } @else {
+                👁️‍🗨️
+              }
+            </button>
+          </div>
+          @if (passwordInput.invalid && passwordInput.touched) {
+            <p class="text-red-600 text-sm mt-1">Password is required</p>
+          }
+        </div>
+
+        <!-- Remember Me -->
+        <div class="flex items-center mb-6">
+          <input
+            type="checkbox"
+            id="rememberMe"
+            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+          />
+          <label for="rememberMe" class="ml-2 block text-sm text-gray-700">
+            Remember me
+          </label>
+        </div>
+
+        <!-- Login Button -->
+        <button
+          type="submit"
+          [disabled]="!isFormValid() || isLoading()"
+          class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition duration-200 flex items-center justify-center gap-2"
+        >
+          @if (isLoading()) {
+            <span class="animate-spin">⏳</span>
+            <span>Logging in...</span>
+          } @else {
+            <span>Login</span>
+          }
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div class="flex items-center my-6">
+        <div class="flex-1 border-t border-gray-300"></div>
+        <div class="px-2 text-gray-500 text-sm">or</div>
+        <div class="flex-1 border-t border-gray-300"></div>
+      </div>
+
+      <!-- Register Link -->
+      <p class="text-center text-gray-600">
+        Don't have an account?
+        <a href="/auth/register" class="text-blue-600 font-medium hover:text-blue-700">
+          Register here
+        </a>
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <p class="text-center text-white text-sm mt-8">
+      © 2026 Inventory Management System. All rights reserved.
+    </p>
+  </div>
+</div>
