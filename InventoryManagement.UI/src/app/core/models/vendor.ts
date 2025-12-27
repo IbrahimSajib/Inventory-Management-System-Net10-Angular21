@@ -1,36 +1,31 @@
 export interface Vendor {
   id: number;
-  name: string;
-  email: string;
+  vendorName: string;
+  email?: string;
   phoneNumber?: string;
   address?: string;
   city?: string;
-  state?: string;
-  zipCode?: string;
-  contactPerson?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  country?: string;
+  postalCode?: string;
+  createdAt: Date;
 }
 
 export interface CreateVendorRequest {
-  name: string;
-  email: string;
+  vendorName: string;
+  email?: string;
   phoneNumber?: string;
   address?: string;
   city?: string;
-  state?: string;
-  zipCode?: string;
-  contactPerson?: string;
+  country?: string;
+  postalCode?: string;
 }
 
 export interface UpdateVendorRequest {
-  id: number;
-  name: string;
-  email: string;
+  vendorName: string;
+  email?: string;
   phoneNumber?: string;
   address?: string;
   city?: string;
-  state?: string;
-  zipCode?: string;
-  contactPerson?: string;
+  country?: string;
+  postalCode?: string;
 }

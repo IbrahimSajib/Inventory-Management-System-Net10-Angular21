@@ -1,35 +1,37 @@
 export interface Item {
   id: number;
-  name: string;
-  description?: string;
-  sku: string;
+  itemCode: string;
+  itemName: string;
   categoryId: number;
+  categoryName: string;
   unitOfMeasureId: number;
+  unitOfMeasureName: string;
   unitPrice: number;
-  reorderLevel: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-  category?: any;
-  unitOfMeasure?: any;
+  reorderLevel?: number;
+  imageUrl?: string;
+  quantityOnHand: number;
+  quantityAvailable: number;
+  createdAt: Date;
 }
 
 export interface CreateItemRequest {
-  name: string;
+  itemCode: string;
+  itemName: string;
   description?: string;
-  sku: string;
   categoryId: number;
   unitOfMeasureId: number;
   unitPrice: number;
-  reorderLevel: number;
+  reorderLevel?: number;
+  imageUrl?: string;
 }
 
 export interface UpdateItemRequest {
-  id: number;
-  name: string;
+  itemCode: string;
+  itemName: string;
   description?: string;
-  sku: string;
   categoryId: number;
   unitOfMeasureId: number;
   unitPrice: number;
-  reorderLevel: number;
+  reorderLevel?: number;
+  imageUrl?: string;
 }

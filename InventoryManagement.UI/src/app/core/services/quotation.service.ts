@@ -3,21 +3,19 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpService } from './http.service';
 import {
-  Item,
-  CreateItemRequest,
-  UpdateItemRequest
-} from '../models/item';
-import { PagedResult } from '../models/api-response';
-
-interface ItemPagedResult extends PagedResult<Item> {}
+  Quotation,
+  CreateQuotationRequest,
+  UpdateQuotationRequest,
+  PagedQuotationResult
+} from '../models/quotation';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
+export class QuotationService {
   private http = inject(HttpService);
   private httpClient = inject(HttpClient);
-  private endpoint = '/Item';
+  private endpoint = '/Quotation';
 
   // Paginated list
   getAll(
@@ -26,7 +24,7 @@ export class ItemService {
     searchTerm?: string,
     sortBy?: string,
     sortDescending?: boolean
-  ): Observable<ItemPagedResult> {
+  ): Observable<PagedQuotationResult> {
     let params = new HttpParams()
       .set('pageNumber', pageNumber)
       .set('pageSize', pageSize);
@@ -41,33 +39,22 @@ export class ItemService {
       params = params.set('sortDescending', sortDescending);
     }
 
-    return this.http.get<ItemPagedResult>(this.endpoint, { params });
+    return this.http.get<PagedQuotationResult>(this.endpoint, { params });
   }
 
-  // Simple list (no pagination)
-  getAllList(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.endpoint}/list`);
+  getById(id: number): Observable<Quotation> {
+    return this.http.get<Quotation>(`${this.endpoint}/${id}`);
   }
 
-  // Low stock items
-  getLowStockItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.endpoint}/low-stock`);
+  create(request: CreateQuotationRequest): Observable<Quotation> {
+    return this.http.post<Quotation>(this.endpoint, request);
   }
 
-  getById(id: number): Observable<Item> {
-    return this.http.get<Item>(`${this.endpoint}/${id}`);
-  }
-
-  create(request: CreateItemRequest): Observable<Item> {
-    return this.http.post<Item>(this.endpoint, request);
-  }
-
-  update(id: number, request: UpdateItemRequest): Observable<Item> {
-    return this.http.put<Item>(`${this.endpoint}/${id}`, request);
+  update(id: number, request: UpdateQuotationRequest): Observable<Quotation> {
+    return this.http.put<Quotation>(`${this.endpoint}/${id}`, request);
   }
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.endpoint}/${id}`);
   }
 }
-

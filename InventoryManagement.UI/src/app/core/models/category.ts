@@ -1,18 +1,16 @@
 export interface Category {
   id: number;
-  name: string;
+  categoryName: string;
   description?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
 }
 
 export interface CreateCategoryRequest {
-  name: string;
+  categoryName: string;
   description?: string;
 }
 
 export interface UpdateCategoryRequest {
-  id: number;
-  name: string;
+  categoryName: string;
   description?: string;
 }

@@ -1,33 +1,31 @@
 export interface Customer {
   id: number;
-  name: string;
-  email: string;
+  customerName: string;
+  email?: string;
   phoneNumber?: string;
   address?: string;
   city?: string;
-  state?: string;
-  zipCode?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  country?: string;
+  postalCode?: string;
+  createdAt: Date;
 }
 
 export interface CreateCustomerRequest {
-  name: string;
-  email: string;
+  customerName: string;
+  email?: string;
   phoneNumber?: string;
   address?: string;
   city?: string;
-  state?: string;
-  zipCode?: string;
+  country?: string;
+  postalCode?: string;
 }
 
 export interface UpdateCustomerRequest {
-  id: number;
-  name: string;
-  email: string;
+  customerName: string;
+  email?: string;
   phoneNumber?: string;
   address?: string;
   city?: string;
-  state?: string;
-  zipCode?: string;
+  country?: string;
+  postalCode?: string;
 }

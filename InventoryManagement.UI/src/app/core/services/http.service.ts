@@ -1,5 +1,6 @@
+// src/app/core/services/http.service.ts
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../models/api-response';
@@ -13,6 +14,19 @@ export class HttpService {
   private notificationService = inject(NotificationService);
   private baseUrl = environment.apiUrl;
 
+  private extractErrorMessage(error: any): string {
+    // Check if error has API response with message
+    if (error.error && error.error.message) {
+      return error.error.message;
+    }
+    // Check if error has error.errors array (validation errors)
+    if (error.error && error.error.errors && Array.isArray(error.error.errors)) {
+      return error.error.errors.join(', ');
+    }
+    // Generic error message
+    return error.message || 'An error occurred';
+  }
+
   get<T>(endpoint: string, options?: { params?: HttpParams }): Observable<T> {
     return this.http.get<ApiResponse<T>>(`${this.baseUrl}${endpoint}`, options)
       .pipe(
@@ -24,7 +38,8 @@ export class HttpService {
           return response.data!;
         }),
         catchError(error => {
-          this.notificationService.showError(error.message || 'An error occurred');
+          const errorMessage = this.extractErrorMessage(error);
+          this.notificationService.showError(errorMessage);
           return throwError(() => error);
         })
       );
@@ -42,7 +57,8 @@ export class HttpService {
           return response.data!;
         }),
         catchError(error => {
-          this.notificationService.showError(error.message || 'An error occurred');
+          const errorMessage = this.extractErrorMessage(error);
+          this.notificationService.showError(errorMessage);
           return throwError(() => error);
         })
       );
@@ -60,7 +76,8 @@ export class HttpService {
           return response.data!;
         }),
         catchError(error => {
-          this.notificationService.showError(error.message || 'An error occurred');
+          const errorMessage = this.extractErrorMessage(error);
+          this.notificationService.showError(errorMessage);
           return throwError(() => error);
         })
       );
@@ -78,7 +95,8 @@ export class HttpService {
           return response.data!;
         }),
         catchError(error => {
-          this.notificationService.showError(error.message || 'An error occurred');
+          const errorMessage = this.extractErrorMessage(error);
+          this.notificationService.showError(errorMessage);
           return throwError(() => error);
         })
       );

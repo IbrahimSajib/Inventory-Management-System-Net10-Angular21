@@ -18,6 +18,7 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAllUsers([FromQuery] PaginationParams pagination)
     {
@@ -25,6 +26,7 @@ public class UserController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetUserById(int id)
     {

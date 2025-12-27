@@ -1,21 +1,19 @@
 export interface UnitOfMeasure {
   id: number;
-  name: string;
-  abbreviation: string;
+  unitName: string;
+  shortName?: string;
   description?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
 }
 
 export interface CreateUnitOfMeasureRequest {
-  name: string;
-  abbreviation: string;
+  unitName: string;
+  shortName?: string;
   description?: string;
 }
 
 export interface UpdateUnitOfMeasureRequest {
-  id: number;
-  name: string;
-  abbreviation: string;
+  unitName: string;
+  shortName?: string;
   description?: string;
 }
