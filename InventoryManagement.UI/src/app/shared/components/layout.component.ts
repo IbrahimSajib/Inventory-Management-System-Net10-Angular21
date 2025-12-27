@@ -20,12 +20,13 @@ export class LayoutComponent {
     { label: 'Users', icon: '👤', route: '/users' },
     { label: 'Categories', icon: '📁', route: '/categories' },
     { label: 'Items', icon: '📦', route: '/items' },
+    { label: 'Unit of Measure', icon: '⚖️', route: '/unit-of-measure' },
     { label: 'Customers', icon: '👥', route: '/customers' },
     { label: 'Vendors', icon: '🚚', route: '/vendors' },
     { label: 'Purchase Orders', icon: '📋', route: '/purchase-orders' },
     { label: 'Sales Orders', icon: '💳', route: '/sales-orders' },
     { label: 'Quotations', icon: '💬', route: '/quotations' },
-    { label: 'Reports', icon: '📈', route: '/reports' }
+    // { label: 'Reports', icon: '📈', route: '/reports' }
   ]);
 
   toggleSidenav(): void {

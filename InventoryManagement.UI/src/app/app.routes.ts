@@ -6,6 +6,10 @@ import { LayoutComponent } from './shared/components/layout.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { CategoriesComponent } from './features/categories/categories.component';
 import { UsersComponent } from './features/users/users.component';
+import { CustomersComponent } from './features/customers/customers.component';
+import { ItemsComponent } from './features/items/items.component';
+import { VendorsComponent } from './features/vendors/vendors.component';
+import { UnitOfMeasureComponent } from './features/unit-of-measure/unit-of-measure.component';
 
 export const routes: Routes = [
   {
@@ -42,10 +46,34 @@ export const routes: Routes = [
         data: { roles: ['Admin', 'Manager'] }
       },
       {
+        path: 'unit-of-measure',
+        component: UnitOfMeasureComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['Admin', 'Manager'] }
+      },
+      {
         path: 'users',
         component: UsersComponent,
         canActivate: [roleGuard],
         data: { roles: ['Admin'] }
+      },
+      {
+        path: 'customers',
+        component: CustomersComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['Admin', 'Manager'] }
+      },
+      {
+        path: 'vendors',
+        component: VendorsComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['Admin', 'Manager'] }
+      },
+      {
+        path: 'items',
+        component: ItemsComponent,
+        canActivate: [roleGuard],
+        data: { roles: ['Admin', 'Manager'] }
       },
       {
         path: '',
